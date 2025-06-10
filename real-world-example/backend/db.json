@@ -1,0 +1,14 @@
+{
+    "todos": [
+        {
+            "id": "2b189ef8-3fce-4748-9b65-cbac128d7357",
+            "title": "Do homework",
+            "completed": false
+        },
+        {
+            "id": "146e9bb1-a0ed-4b03-b2f2-e89a7731c0a5",
+            "title": "Buy groceries",
+            "completed": false
+        }
+    ]
+}
