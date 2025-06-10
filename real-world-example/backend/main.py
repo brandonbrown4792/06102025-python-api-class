@@ -66,20 +66,17 @@ def get_todo(todo_id):
 @app.route('/api/todos', methods=['POST'])
 @cross_origin(supports_credentials=True)
 def create_todo():
-    try:
-        tasks = read_db()
-        todo_data = request.get_json()
-        new_task = Task(todo_data.get('title', ''), todo_data.get('completed', False))
-        new_task.id = str(uuid.uuid4())
-        tasks.append(new_task)
-        write_db(tasks)
-        return jsonify({
-            'id': new_task.id,
-            'title': new_task.title,
-            'completed': new_task.completed
-        }), 201
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+    tasks = read_db()
+    todo_data = request.get_json()
+    new_task = Task(todo_data.get('title', ''), todo_data.get('completed', False))
+    new_task.id = str(uuid.uuid4())
+    tasks.append(new_task)
+    write_db(tasks)
+    return jsonify({
+        'id': new_task.id,
+        'title': new_task.title,
+        'completed': new_task.completed
+    }), 201
 
 @app.route('/api/todos/<todo_id>', methods=['PUT'])
 @cross_origin(supports_credentials=True)

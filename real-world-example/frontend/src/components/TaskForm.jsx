@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
+import { API_URL } from '../api';
 
 function TaskForm() {
   const [title, setTitle] = useState('');
@@ -10,7 +11,7 @@ function TaskForm() {
 
   useEffect(() => {
     if (id) {
-      fetch(`http://localhost:5000/api/todos/${id}`)
+      fetch(`${API_URL}/api/todos/${id}`)
         .then(res => {
           if (!res.ok) throw new Error('Task not found');
           return res.json();
@@ -32,7 +33,7 @@ function TaskForm() {
 
     try {
       const method = id ? 'PUT' : 'POST';
-      const url = id ? `http://localhost:5000/api/todos/${id}` : 'http://localhost:5000/api/todos';
+      const url = id ? `${API_URL}/api/todos/${id}` : `${API_URL}/api/todos`;
 
       const response = await fetch(url, {
         method,

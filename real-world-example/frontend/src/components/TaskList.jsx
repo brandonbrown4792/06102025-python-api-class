@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import TaskItem from './TaskItem';
+import { API_URL } from '../api';
 
 function TaskList() {
   const [tasks, setTasks] = useState([]);
@@ -8,7 +9,7 @@ function TaskList() {
 
   const fetchTasks = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/todos');
+      const res = await fetch(`${API_URL}/api/todos`);
       const data = await res.json();
       setTasks(data);
     } catch (error) {
@@ -23,7 +24,7 @@ function TaskList() {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this task?')) {
       try {
-        await fetch(`http://localhost:5000/api/todos/${id}`, {
+        await fetch(`${API_URL}/api/todos/${id}`, {
           method: 'DELETE',
         });
         await fetchTasks();
@@ -36,7 +37,7 @@ function TaskList() {
 
   const handleToggleComplete = async (task) => {
     try {
-      await fetch(`http://localhost:5000/api/todos/${task.id}`, {
+      await fetch(`${API_URL}/api/todos/${task.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
